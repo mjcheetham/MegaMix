@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Microsoft Managed Recommended Rules" ToolsVersion="14.0">
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1001" Action="Warning" />
+    <Rule Id="CA1009" Action="Info" />
+    <Rule Id="CA1016" Action="Info" />
+    <Rule Id="CA1033" Action="Info" />
+    <Rule Id="CA1049" Action="Error" />
+    <Rule Id="CA2240" Action="Warning" />
+    <Rule Id="CA2241" Action="None" />
+    <Rule Id="CA2242" Action="Error" />
+  </Rules>
+</RuleSet>

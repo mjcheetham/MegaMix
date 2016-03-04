@@ -1,0 +1,18 @@
+// Cpp_ATL.idl : IDL source for Cpp_ATL
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Cpp_ATL.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(96D7FCDD-1267-4DDC-A593-D8B5E9275D41),
+	version(1.0),
+]
+library Cpp_ATLLib
+{
+	importlib("stdole2.tlb");
+};
+
