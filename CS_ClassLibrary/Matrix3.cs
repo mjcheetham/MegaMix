@@ -149,34 +149,20 @@ namespace CS_ClassLibrary
 
         public static bool operator ==(Matrix3 a, Matrix3 b)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (!FloatingPointHelper.AlmostEqual(a[i, j], b[i, j]))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return FloatingPointHelper.AlmostEqual(a[0, 0], b[0, 0])
+                && FloatingPointHelper.AlmostEqual(a[0, 1], b[0, 1])
+                && FloatingPointHelper.AlmostEqual(a[0, 2], b[0, 2])
+                && FloatingPointHelper.AlmostEqual(a[1, 0], b[1, 0])
+                && FloatingPointHelper.AlmostEqual(a[1, 1], b[1, 1])
+                && FloatingPointHelper.AlmostEqual(a[1, 2], b[1, 2])
+                && FloatingPointHelper.AlmostEqual(a[2, 0], b[2, 0])
+                && FloatingPointHelper.AlmostEqual(a[2, 1], b[2, 1])
+                && FloatingPointHelper.AlmostEqual(a[2, 2], b[2, 2]);
         }
 
         public static bool operator !=(Matrix3 a, Matrix3 b)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (FloatingPointHelper.AlmostEqual(a[i, j], b[i, j]))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            return !(a == b);
         }
 
         #endregion
