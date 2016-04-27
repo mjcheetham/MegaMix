@@ -167,6 +167,56 @@ namespace CS_ClassLibrary
 
         #endregion
 
+        #region Multiplication
+
+        public static Matrix3 ElementMultiply(Matrix3 a, Matrix3 b)
+        {
+            return new Matrix3
+            {
+                M11 = a.M11 * b.M11,
+                M12 = a.M12 * b.M12,
+                M13 = a.M13 * b.M13,
+                M21 = a.M21 * b.M21,
+                M22 = a.M22 * b.M22,
+                M23 = a.M23 * b.M23,
+                M31 = a.M31 * b.M31,
+                M32 = a.M32 * b.M32,
+                M33 = a.M33 * b.M33
+            };
+        }
+
+        public Matrix3 ElementMultiply(Matrix3 other)
+        {
+            return ElementMultiply(this, other);
+        }
+
+        #endregion
+
+        #region Transposition
+
+        public static Matrix3 Transpose(Matrix3 matrix)
+        {
+            return new Matrix3
+            {
+                M11 = matrix.M11,
+                M12 = matrix.M21,
+                M13 = matrix.M31,
+                M21 = matrix.M12,
+                M22 = matrix.M22,
+                M23 = matrix.M32,
+                M31 = matrix.M13,
+                M32 = matrix.M23,
+                M33 = matrix.M33
+            };
+        }
+
+        public Matrix3 Transpose()
+        {
+            return Transpose(this);
+        }
+
+        #endregion
+
         #region Equality overrides
 
         public override bool Equals(object obj)
