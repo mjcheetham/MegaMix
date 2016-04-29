@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FPHelper.cs" />
-    <Compile Include="Matrix3.cs" />
+    <Compile Include="FloatingPointHelper.cs" />
+    <Compile Include="LinearAlgebra\IMatrix3InverseAlgorithm.cs" />
+    <Compile Include="LinearAlgebra\Matrix3.cs" />
+    <Compile Include="LinearAlgebra\NoInverseException.cs" />
+    <Compile Include="LinearAlgebra\SimpleMatrix3InverseAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

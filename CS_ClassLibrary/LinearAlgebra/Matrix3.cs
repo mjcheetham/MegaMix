@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace CS_ClassLibrary
+namespace CS_ClassLibrary.LinearAlgebra
 {
     public class Matrix3 : IEquatable<Matrix3>
     {
@@ -93,7 +93,7 @@ namespace CS_ClassLibrary
             this.elements = elements;
         }
 
-        public static Matrix3 Identity => new Matrix3(new[,] { { 1d, 0d, 0d }, { 0d, 1d, 0d }, { 0d, 0d, 1d } });
+        public static Matrix3 Identity => new Matrix3 { M11 = 1d, M22 = 1d, M33 = 1d };
 
         #endregion
 
@@ -147,6 +147,22 @@ namespace CS_ClassLibrary
             };
         }
 
+        public static Matrix3 operator *(double scalar, Matrix3 matrix)
+        {
+            return new Matrix3
+            {
+                M11 = scalar * matrix.M11,
+                M12 = scalar * matrix.M12,
+                M13 = scalar * matrix.M13,
+                M21 = scalar * matrix.M21,
+                M22 = scalar * matrix.M22,
+                M23 = scalar * matrix.M23,
+                M31 = scalar * matrix.M31,
+                M32 = scalar * matrix.M32,
+                M33 = scalar * matrix.M33,
+            };
+        }
+
         public static bool operator ==(Matrix3 a, Matrix3 b)
         {
             return FloatingPointHelper.AlmostEqual(a[0, 0], b[0, 0])
@@ -192,6 +208,41 @@ namespace CS_ClassLibrary
 
         #endregion
 
+        #region Determinant
+
+        public double Determinant()
+        {
+            var a = this.M11;
+            var b = this.M12;
+            var c = this.M12;
+            var d = this.M21;
+            var e = this.M22;
+            var f = this.M23;
+            var g = this.M31;
+            var h = this.M32;
+            var i = this.M33;
+
+            return (a * e * i)
+                 + (b * f * g)
+                 + (c * d * h)
+                 - (c * e * g)
+                 - (b * d * i)
+                 - (a * f * h);
+        }
+
+        #endregion
+
+        #region Inversion
+
+        public Matrix3 Inverse() => this.Inverse(new SimpleMatrix3InverseAlgorithm());
+
+        public Matrix3 Inverse(IMatrix3InverseAlgorithm inverter)
+        {
+            return inverter.Inverse(this);
+        }
+
+        #endregion
+
         #region Transposition
 
         public static Matrix3 Transpose(Matrix3 matrix)
@@ -213,6 +264,52 @@ namespace CS_ClassLibrary
         public Matrix3 Transpose()
         {
             return Transpose(this);
+        }
+
+        #endregion
+
+        #region Adjoint/Cofactor
+
+        internal Matrix3 Adjoint()
+        {
+            return this.Cofactor().Transpose();
+        }
+
+        internal Matrix3 Cofactor()
+        {
+            var a = this.M11; // a b c
+            var b = this.M12; // d e f
+            var c = this.M12; // g h i
+            var d = this.M21;
+            var e = this.M22;
+            var f = this.M23;
+            var g = this.M31;
+            var h = this.M32;
+            var i = this.M33;
+
+            // minors
+            var m11 = e * i - f * h;
+            var m12 = d * i - f * g;
+            var m13 = d * h - e * g;
+            var m21 = b * i - c * h;
+            var m22 = a * i - c * g;
+            var m23 = a * h - b * g;
+            var m31 = b * f - c * e;
+            var m32 = a * f - c * d;
+            var m33 = a * e - b * d;
+
+            return new Matrix3
+            {
+                M11 = m11,
+                M12 = m12,
+                M13 = m13,
+                M21 = m21,
+                M22 = m22,
+                M23 = m23,
+                M31 = m31,
+                M32 = m32,
+                M33 = m33
+            };
         }
 
         #endregion
